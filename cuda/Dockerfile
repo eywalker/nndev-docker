@@ -8,6 +8,7 @@ ENV LANG C.UTF-8
 RUN apt-get update &&\
     apt-get install -y software-properties-common \
                        build-essential \
+                       cmake \
                        git \
                        wget \
                        vim \
@@ -32,6 +33,7 @@ RUN apt-get update &&\
 
 # Install essential Python packages
 RUN pip3 --no-cache-dir install \
+         cython \
          numpy \
          matplotlib \
          scipy \
@@ -46,6 +48,19 @@ RUN pip3 --no-cache-dir install \
          theano \
          lasagne \
          keras
+
+# Install libgpuarray and pygpu
+WORKDIR /src
+RUN git clone https://github.com/Theano/libgpuarray.git &&\
+    cd libgpuarray &&\
+    mkdir Build && cd Build &&\
+    cmake .. -DCMAKE_BUILD_TYPE=Release &&\
+    make && make install && cd .. &&\
+    python3 setup.py build &&\
+    python3 setup.py install &&\
+    ldconfig
+
+
 
 # Add .theanorc
 COPY theanorc /root/.theanorc

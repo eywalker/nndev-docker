@@ -2,6 +2,8 @@
 FROM ubuntu:16.04
 MAINTAINER Edgar Y. Walker <edgar.walker@gmail.com>
 
+ENV LANG C.UTF-8
+
 # Install essential Ubuntu packages, and upgrade pip
 RUN apt-get update &&\
     apt-get install -y software-properties-common \
@@ -40,4 +42,7 @@ RUN pip3 --no-cache-dir install \
          datajoint \
          tensorflow \
          http://download.pytorch.org/whl/cu80/torch-0.1.11.post5-cp35-cp35m-linux_x86_64.whl \
-         torchvision
+         torchvision \
+         theano \
+         lasagne \
+         keras
