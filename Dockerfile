@@ -44,5 +44,5 @@ RUN pip3 --no-cache-dir install \
          http://download.pytorch.org/whl/cu80/torch-0.1.11.post5-cp35-cp35m-linux_x86_64.whl \
          torchvision \
          theano \
-         lasagne \
+         git+https://github.com/Lasagne/Lasagne \
          keras
